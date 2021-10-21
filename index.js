@@ -1,16 +1,14 @@
-const express = require('express');
-const app = express();
-const http = require('http');
-const server = http.createServer(app);
-const { Server } = require("socket.io");
-const io = new Server(server);
+const app = require('express')();
+const http = require('http').Server(app);
+const io = require('socket.io')(http);
 
-app.get('/', (req, res) => {
+app.get('/', function(req, res) {
   res.sendFile(__dirname + '/public/index.html');
 });
 
-io.on('connection', (socket) => {
+io.on('connection', function(socket) {
   console.log('a user connected');
+  console.log(socket.request.url);
 
   socket.on('disconnect', () => {
     console.log('user disconnected');
@@ -23,6 +21,6 @@ io.on('connection', (socket) => {
 
 });
 
-server.listen(3000, () => {
+http.listen(3000, function() {
   console.log('listening on *:3000');
 });
