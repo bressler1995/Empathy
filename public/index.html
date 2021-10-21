@@ -9,7 +9,7 @@
 
         <script src="/socket.io/socket.io.js"></script>
         <script>
-            let socket = io('ws://localhost:3000', {transports: ['websocket']});
+            let socket = io('http://54.218.29.145', {transports: ['websocket']});
             let triggeropt = document.getElementById("triggeropt");
             triggeropt.addEventListener("click", emit_test);
 
