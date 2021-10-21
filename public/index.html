@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Server Test</title>
+    </head>
+    <body>
+        <h1>Server Test</h1>
+        <button id="triggeropt" type="button">Trigger</button>
+
+        <script src="https://cdn.socket.io/4.3.2/socket.io.min.js" integrity="sha384-KAZ4DtjNhLChOB/hxXuKqhMLYvx3b5MlT55xPEiNmREKRzeEm+RVPlTnAn0ajQNs" crossorigin="anonymous"></script>
+        <script>
+            let socket = io();
+            let triggeropt = document.getElementById("triggeropt");
+            triggeropt.addEventListener("click", emit_test);
+
+            function emit_test() {
+                socket.emit('chat message', "Lorem");
+            }
+
+            socket.on('chat message', function(msg) {
+                console.log(msg);
+            });
+        </script>
+    </body>
+</html>
