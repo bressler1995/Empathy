@@ -10,15 +10,16 @@
         <script src="/socket.io/socket.io.js"></script>
         <script>
             
-            const socket = io();
+            // const socket = io('http://http://localhost:3000', {'transports': ['websocket', 'polling']});
+            const socket = io('http://http://54.218.29.145:3000', {'transports': ['websocket', 'polling']});
             let triggeropt = document.getElementById("triggeropt");
             triggeropt.addEventListener("click", emit_test);
 
             function emit_test() {
-                socket.emit('chat message', "Lorem");
+                socket.emit('chat_message', "Lorem");
             }
 
-            socket.on('chat message', function(msg) {
+            socket.on('chat_message', function(msg) {
                 console.log(msg);
             });
         </script>
