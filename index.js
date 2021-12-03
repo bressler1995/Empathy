@@ -1,8 +1,13 @@
 const express = require('express');
 const app = express();
-const http = require('http');
-const server = http.createServer(app);
+const server = require('http').createServer(app);
 var io = require('socket.io')(server, {'transports': ['websocket', 'polling']});
+
+let storage_message = [];
+let storage_message_x = [];
+let storage_message_y = [];
+
+app.use(express.static(__dirname + '/public'));
 
 app.get('/', (req, res) => {
   res.sendFile(__dirname + '/public/index.html');
@@ -14,13 +19,15 @@ io.on('connection', (socket) => {
 
   socket.on('disconnect', () => {
     console.log('user disconnected');
-    var clients = io.sockets.clients();
-    console.log(clients);
   });
 
-  socket.on('chat_message', (msg) => {
-    console.log('message: ' + msg);
-    io.emit('chat_message', msg);
+  socket.on('message', (msg) => {
+    console.log('message: ' + msg.thememessage);
+    console.log('message: ' + msg.thex);
+    console.log('message: ' + msg.they);
+    storage_message.push(msg.thememessage);
+
+    io.emit('message', msg);
   });
 
 });

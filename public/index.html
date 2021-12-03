@@ -1,27 +1,28 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Server Test</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <!-- Live Server -->
+        <!-- <script src="http://54.218.29.145:3000/assets/js/p5.min.js"></script> -->
+        <!-- <script src="http://54.218.29.145:3000/assets/js/p5.sound.min.js"></script> -->
+
+        <link rel="stylesheet" href="http://localhost:3000/assets/css/style.css">
+        <title>EMPATHY</title>
     </head>
     <body>
-        <h1>Server Test</h1>
-        <button id="triggeropt" type="button">Trigger</button>
+        <h2>Empathy Placeholder</h2>
+        <!-- Initial Code -->
+        <!-- <h1>Server Test</h1>
+        <button id="triggeropt" type="button">Trigger</button> -->
 
-        <script src="http://54.218.29.145:3000/socket.io/socket.io.js"></script>
-        <script>
-            
-            // const socket = io('http://localhost:3000', {'transports': ['websocket', 'polling']});
-            const socket = io('http://54.218.29.145:3000', {'transports': ['websocket', 'polling']});
-            let triggeropt = document.getElementById("triggeropt");
-            triggeropt.addEventListener("click", emit_test);
+        <!-- Live Server -->
+        <!-- <script src="http://54.218.29.145:3000/socket.io/socket.io.js"></script> -->
+        <!-- <script src="http://54.218.29.145:3000/assets/js/uicontrol.js"></script> -->
 
-            function emit_test() {
-                socket.emit('chat_message', "Lorem");
-            }
-
-            socket.on('chat_message', function(msg) {
-                console.log(msg);
-            });
-        </script>
+        <!-- Local Server -->
+        <script src="http://localhost:3000/socket.io/socket.io.js"></script>
+        <script src="http://localhost:3000/assets/js/uicontrol.js"></script>
     </body>
 </html>
