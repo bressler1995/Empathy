@@ -14,18 +14,28 @@ app.get('/', (req, res) => {
 });
 
 io.on('connection', (socket) => {
-  console.log('a user connected');
+  console.log('Empathy: Client Connected');
   console.log(socket.request.url);
 
+  for(i=0; i < storage_message.length; i++) {
+    let msgtosend = {  
+        thememessage : storage_message[i],  
+        thex : storage_message_x[i],
+        they : storage_message_y[i]
+    };  
+
+    io.emit('message', msgtosend);
+  }
+
   socket.on('disconnect', () => {
-    console.log('user disconnected');
+    console.log('Empathy: Client Disconnected');
   });
 
   socket.on('message', (msg) => {
-    console.log('message: ' + msg.thememessage);
-    console.log('message: ' + msg.thex);
-    console.log('message: ' + msg.they);
+    console.log('Message: ' + msg.thememessage + ", X: " +  msg.thex + ", Y: " +  msg.they);
     storage_message.push(msg.thememessage);
+    storage_message_x.push(msg.thex);
+    storage_message_y.push(msg.they);
 
     io.emit('message', msg);
   });
